@@ -11,7 +11,7 @@ Let's use a really simple example. Make a new directory in the top level of this
   * `hello.rb`
   * `randomize.rb`
 2. At the top of `config.ru` add the lines
-  
+
   ```ruby
   require 'rack'
   require_relative './hello'
@@ -49,13 +49,9 @@ Let's use a really simple example. Make a new directory in the top level of this
   ```
 
 5. Let's look at these classes one at a time, and then talk about how we'll use them in our `config.ru` file.
-
   First, we'll look at `Hello`. This look pretty familiar. It's a class that responds to `call` and accepts `env` as an argument. Nothing new there.
-
   `Randomize` looks a little weird, though. For one, it has an `initialize` method. For another, it does some weird stuff in the `call` method. Let's look at `initialize` first.
-
   `initialize` accepts one argument, which is the previous app in the Rack stack. In this case, `app` is `Hello`.
-
   `call` actually triggers the `call` method on `Hello`, and stores the response into some variables we can play around with. Then, we add a string to the end of the response. Remember, the response content is always an array. This is why we need to call `.first` on our response variable and why, again, we wrap our new `response_body` variable in brackets.
 
   This will become a little clearer when we see the change we need to make in our `config.ru` file.
